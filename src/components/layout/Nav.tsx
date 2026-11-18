@@ -172,6 +172,9 @@ export function Nav() {
                 <a href={`mailto:${site.email}`} className="text-ink-2 hover:text-ink">
                   {site.email}
                 </a>
+                <a href={site.phone.href} className="text-ink-2 hover:text-ink">
+                  {site.phone.display}
+                </a>
               </div>
               <div className="flex gap-3">
                 <a href={site.github} target="_blank" rel="noreferrer noopener" aria-label="GitHub" className="rounded-full border border-line p-3 text-ink-2 hover:text-ink">

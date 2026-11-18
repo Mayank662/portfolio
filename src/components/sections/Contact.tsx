@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, Check, Loader2, Mail } from "lucide-react";
+import { ArrowUpRight, Check, Loader2, Mail, Phone } from "lucide-react";
 import { site } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -94,7 +94,17 @@ export function Contact() {
                 </span>
                 {site.email}
               </a>
-              <div className="flex gap-3">
+              <a
+                href={site.phone.href}
+                className="group inline-flex w-fit items-center gap-3 text-lg text-ink transition-colors hover:text-accent-2"
+                data-cursor="link"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line transition-colors group-hover:border-accent">
+                  <Phone className="h-4 w-4" />
+                </span>
+                {site.phone.display}
+              </a>
+              <div className="mt-2 flex gap-3">
                 <a
                   href={site.linkedin}
                   target="_blank"

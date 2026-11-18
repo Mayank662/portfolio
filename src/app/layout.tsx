@@ -62,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     name: site.name,
     jobTitle: site.title,
     email: `mailto:${site.email}`,
+    telephone: site.phone.e164,
     url: site.url,
     sameAs: [site.github, site.linkedin],
     knowsAbout: ["Backend Engineering", "AI Agents", "LLM Integration", "Python", "FastAPI", "Django"],

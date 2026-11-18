@@ -7,6 +7,7 @@ export const site = {
   // Resolved in next.config.ts (explicit env → Vercel production domain → localhost).
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   email: "mayankgoyal662@gmail.com",
+  phone: { display: "+91-9149121554", href: "tel:+919149121554", e164: "+919149121554" },
   github: "https://github.com/mayank662",
   linkedin: "https://www.linkedin.com/in/mayank-goel-724932174/",
   location: "India · Remote-friendly",

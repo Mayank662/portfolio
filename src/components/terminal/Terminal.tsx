@@ -62,7 +62,14 @@ function run(cmd: string): { lines: Line[]; action?: "clear" | "close" | `goto:$
     case "services":
       return { lines: services.map((s) => out(`${s.index}  ${s.title} — ${s.blurb}`)) };
     case "contact":
-      return { lines: [out(`email     ${site.email}`), out(`github    ${site.github}`), out(`linkedin  ${site.linkedin}`)] };
+      return {
+        lines: [
+          out(`email     ${site.email}`),
+          out(`phone     ${site.phone.display}`),
+          out(`github    ${site.github}`),
+          out(`linkedin  ${site.linkedin}`),
+        ],
+      };
     case "github":
       return { lines: [out("opening github…")], action: `open:${site.github}` };
     case "linkedin":
