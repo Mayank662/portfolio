@@ -14,7 +14,7 @@ export const site = {
   github: "https://github.com/mayank662",
   linkedin: "https://www.linkedin.com/in/mayank-goel-724932174/",
   location: "India · Remote-friendly",
-  availability: "Open to select freelance projects",
+  availability: "Currently building · open to new ideas",
 } as const;
 
 export const nav = [

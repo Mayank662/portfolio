@@ -69,7 +69,7 @@ export function Hero() {
         >
           <span className="eyebrow">AI Engineer / Backend Engineer</span>
           <span className="hidden h-px w-10 bg-line-2 sm:block" />
-          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-bg-2/60 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-ink-2 backdrop-blur">
+          <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-bg-2/60 px-3 py-1 font-mono text-[9.5px] uppercase tracking-[0.12em] text-ink-2 backdrop-blur sm:text-[10.5px] sm:tracking-[0.18em]">
             <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-dot" />
             {site.availability}
           </span>
