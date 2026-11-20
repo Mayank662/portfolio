@@ -29,7 +29,7 @@ function run(cmd: string): { lines: Line[]; action?: "clear" | "close" | `goto:$
           "projects        selected work",
           "experience      where I've worked",
           "skills          stack I use",
-          "services        what you can hire me for",
+          "services        where I do my best work",
           "contact         how to reach me",
           "open <section>  jump to a section (about, work, playground, beyond, contact)",
           "github / linkedin   open profile in a new tab",
@@ -49,7 +49,7 @@ function run(cmd: string): { lines: Line[]; action?: "clear" | "close" | `goto:$
     case "projects":
     case "ls":
       return {
-        lines: projects.map((p) => out(`${p.index}  ${p.title.padEnd(36)} [${p.status}]  ${p.stack.slice(0, 4).join(", ")}`)),
+        lines: projects.map((p) => out(`${p.index}  ${p.title.padEnd(40)} ${p.stack.slice(0, 4).join(", ")}`)),
       };
     case "experience":
     case "history":
@@ -66,6 +66,7 @@ function run(cmd: string): { lines: Line[]; action?: "clear" | "close" | `goto:$
         lines: [
           out(`email     ${site.email}`),
           out(`phone     ${site.phone.display}`),
+          out(`whatsapp  ${site.whatsapp.split("?")[0]}`),
           out(`github    ${site.github}`),
           out(`linkedin  ${site.linkedin}`),
         ],
@@ -77,7 +78,16 @@ function run(cmd: string): { lines: Line[]; action?: "clear" | "close" | `goto:$
     case "open":
     case "cd": {
       const target = (args[0] ?? "").toLowerCase().replace(/^#/, "");
-      const alias: Record<string, string> = { work: "work", projects: "work", services: "services", top: "top", home: "top" };
+      const alias: Record<string, string> = {
+        work: "work",
+        projects: "work",
+        experience: "work",
+        services: "services",
+        hire: "contact",
+        freelance: "contact",
+        top: "top",
+        home: "top",
+      };
       const id = alias[target] ?? target;
       const ok = id === "top" || nav.some((n) => n.href === `#${id}`);
       return ok

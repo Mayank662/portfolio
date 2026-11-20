@@ -98,6 +98,39 @@ export function Diagram({ kind }: { kind: Project["diagram"] }) {
         </g>
       )}
 
+      {kind === "rag" && (
+        <g>
+          <circle cx="250" cy="140" r="62" fill={`url(#g-${kind})`} />
+          {/* ingestion row */}
+          <Node x={60} y={46} w={64} label="Docs" />
+          <Node x={155} y={46} w={64} label="Ingest" />
+          <Node x={250} y={46} w={72} label="pgvector" />
+          <Flow d="M92 46 L 123 46" />
+          <Flow d="M187 46 L 214 46" />
+          {/* request path */}
+          <Node x={60} y={140} w={64} label="Customer" />
+          <Node x={155} y={140} w={64} label="FastAPI" />
+          <Flow d="M92 140 L 123 140" />
+          <Flow d="M187 140 L 222 140" />
+          <circle cx="250" cy="140" r="28" {...common} className="text-accent-2" />
+          <text x="250" y="144" textAnchor="middle" className="fill-ink font-mono text-[10px] uppercase tracking-wider">Agent</text>
+          <circle cx="250" cy="140" r="40" {...common} className="text-accent/40 [stroke-dasharray:2_6]" />
+          {/* retrieval + tool */}
+          <Flow d="M250 60 L 250 112" />
+          <Node x={250} y={222} w={84} label="Account API" />
+          <Flow d="M250 168 L 250 208" />
+          {/* outcomes */}
+          <Node x={362} y={104} w={84} label="Cited answer" />
+          <Node x={362} y={176} w={84} label="Human" />
+          <Flow d="M276 128 C 296 118, 306 106, 320 104" />
+          <path d="M276 152 C 296 162, 306 174, 320 176" {...common} className="text-ink-3 [stroke-dasharray:3_5]" />
+          <text x="362" y="205" textAnchor="middle" className="fill-ink-3 font-mono text-[8px] uppercase tracking-wider">low confidence</text>
+          {/* observability */}
+          <path d="M30 196 L 190 196" {...common} className="text-ink-3/70 [stroke-dasharray:3_6]" />
+          <text x="30" y="214" className="fill-ink-3 font-mono text-[8px] uppercase tracking-wider">traces · evals on every change</text>
+        </g>
+      )}
+
       {kind === "devtools" && (
         <g>
           <rect x="40" y="40" width="200" height="180" rx="12" {...common} className="text-ink-2/70" />

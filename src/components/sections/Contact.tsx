@@ -7,7 +7,7 @@ import { site } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { GitHubIcon, LinkedInIcon } from "@/components/ui/Icons";
+import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 
 const TYPES = ["Backend Engineering", "AI / LLM Application", "Architecture & Consulting", "Something else"] as const;
@@ -104,7 +104,15 @@ export function Contact() {
                 </span>
                 {site.phone.display}
               </a>
-              <div className="mt-2 flex gap-3">
+              <div className="mt-2 flex flex-wrap gap-3">
+                <a
+                  href={site.whatsapp}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-4 py-2.5 text-sm text-ink transition-colors hover:border-accent hover:bg-accent/20"
+                >
+                  <WhatsAppIcon className="h-4 w-4" /> WhatsApp <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
                 <a
                   href={site.linkedin}
                   target="_blank"

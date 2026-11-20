@@ -1,7 +1,11 @@
 /**
- * Selected Work — real projects from Mayank's professional experience.
+ * Experience — real projects from Mayank's professional experience.
  * Metrics quoted are the ones stated on his CV. Employer-internal details are
  * kept at the level already public on his profile.
+ *
+ * Entries with status "example" are illustrative engagements (how a typical
+ * freelance project would run). They are labelled as such on the card and must
+ * never claim a real client, real metrics or real outcomes.
  */
 export type Project = {
   slug: string;
@@ -12,10 +16,10 @@ export type Project = {
   problem: string;
   approach: string[];
   stack: string[];
-  status: "concept" | "in-progress" | "shipped";
+  status: "concept" | "in-progress" | "shipped" | "example";
   links?: { label: string; href: string }[];
   /** Which abstract diagram to render on the card. */
-  diagram: "agent" | "workflow" | "services" | "devtools";
+  diagram: "agent" | "workflow" | "services" | "devtools" | "rag" | "agent-dash" | "service-dash";
 };
 
 export const projects: Project[] = [
@@ -41,8 +45,46 @@ export const projects: Project[] = [
     diagram: "agent",
   },
   {
-    slug: "rca-agent",
+    slug: "agent-observability-dashboards",
     index: "02",
+    title: "Agent Performance & Cost Dashboards",
+    kicker: "UKG · LLM Observability · Dashboards",
+    summary:
+      "Live dashboards that show how an AI agent really behaves — latency percentiles, accuracy, tool performance, token spend and cost per run — so the team can see whether a change made it better, slower or more expensive.",
+    problem:
+      "LLM agents fail quietly. A prompt tweak adds a second of latency, a tool starts timing out, or a model change doubles the token bill — and without per-step visibility nobody notices until users or finance do.",
+    approach: [
+      "OpenTelemetry instrumentation on every agent step — prompts, tool calls and retries — exported as hierarchical traces",
+      "Grafana dashboards for p50/p99 latency, agent accuracy and tool performance",
+      "Token usage and cost per run, broken down by tool and model, to catch expensive regressions early",
+      "Trace waterfalls that show exactly where a slow or failed run spent its time",
+    ],
+    stack: ["Grafana", "Prometheus", "OpenTelemetry", "Arize AI", "LangChain", "Python"],
+    status: "shipped",
+    diagram: "agent-dash",
+  },
+  {
+    slug: "service-health-dashboards",
+    index: "03",
+    title: "Service Health Dashboards",
+    kicker: "UKG · Platform Observability",
+    summary:
+      "Real-time views of the services behind the product — memory and garbage collection, network and request traffic, and the number of pods serving it — so problems show up on a graph before they show up in a ticket.",
+    problem:
+      "Services degrade gradually: memory creeps up between GC cycles, traffic spikes outgrow the pods serving them, and network saturation hides behind 'it's just slow today'. Logs alone don't show the trend.",
+    approach: [
+      "Memory and garbage-collection panels to spot leaks and GC pressure early",
+      "Network in/out and request-traffic panels per service",
+      "Pod counts shown side by side with load, so scaling problems are visible at a glance",
+      "Prometheus metrics with OpenTelemetry instrumentation, visualised in Grafana",
+    ],
+    stack: ["Grafana", "Prometheus", "OpenTelemetry"],
+    status: "shipped",
+    diagram: "service-dash",
+  },
+  {
+    slug: "rca-agent",
+    index: "04",
     title: "Root Cause Analysis Agent",
     kicker: "MastersIndia · AI Agent · MCP",
     summary:
@@ -61,7 +103,7 @@ export const projects: Project[] = [
   },
   {
     slug: "monolith-to-microservices",
-    index: "03",
+    index: "05",
     title: "Monolith → Microservices Migration",
     kicker: "MastersIndia · Backend · GST Compliance",
     summary:
@@ -80,7 +122,7 @@ export const projects: Project[] = [
   },
   {
     slug: "credit-decision-platform",
-    index: "04",
+    index: "06",
     title: "Automated Credit & Loan Decisioning",
     kicker: "Kalolytic · FinTech · Government Initiative",
     summary:
@@ -96,5 +138,24 @@ export const projects: Project[] = [
     stack: ["Python", "Django", "PostgreSQL", "Linux", "Observability"],
     status: "shipped",
     diagram: "workflow",
+  },
+  {
+    slug: "example-ai-support-copilot",
+    index: "07",
+    title: "AI Support Copilot for a SaaS Help Desk",
+    kicker: "AI Agent · Python Backend · RAG",
+    summary:
+      "How I'd run a typical four-week freelance build: an in-product assistant that answers customers from your docs and account data — a FastAPI backend, retrieval you can measure, and a trace behind every answer.",
+    problem:
+      "A B2B SaaS team with a few thousand help-centre articles and a support queue full of repeat questions. They want an assistant inside the product that answers from their own docs, looks up the customer's account when it needs to, cites its sources, and hands off to a human when it isn't sure — without adopting another platform to babysit.",
+    approach: [
+      "Week 1 — Discovery: map the top ticket types, turn a sample of real questions into an evaluation set, and agree target metrics up front (answer accuracy, citation rate, p95 latency)",
+      "Week 2 — Data pipeline: FastAPI + Celery ingestion of docs into PostgreSQL with pgvector, hybrid keyword + vector search, and re-indexing whenever the docs change",
+      "Week 3 — Agent: a LangGraph flow with retrieval, an account-lookup tool on the existing API, cited answers, and a confidence gate that routes to a human",
+      "Week 4 — Production: OpenTelemetry tracing per answer, evals that run on every change, Docker deploy, runbook and a handover session with the team",
+    ],
+    stack: ["Python", "FastAPI", "LangGraph", "RAG", "PostgreSQL", "pgvector", "Celery", "Redis", "OpenTelemetry", "Docker"],
+    status: "example",
+    diagram: "rag",
   },
 ];

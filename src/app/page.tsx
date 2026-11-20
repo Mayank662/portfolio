@@ -8,6 +8,7 @@ import { Playground } from "@/components/sections/Playground";
 import { Beyond } from "@/components/sections/Beyond";
 import { Contact } from "@/components/sections/Contact";
 import { Marquee } from "@/components/sections/Marquee";
+import { WhatsAppFab } from "@/components/ui/WhatsAppFab";
 
 export default function Page() {
   return (
@@ -24,6 +25,7 @@ export default function Page() {
         <Contact />
       </main>
       <Footer />
+      <WhatsAppFab />
     </>
   );
 }

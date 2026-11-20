@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { RevealLines } from "@/components/ui/Reveal";
-import { GitHubIcon, LinkedInIcon } from "@/components/ui/Icons";
+import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/Icons";
 import { useMediaQuery, usePrefersReducedMotion, useWebGL } from "@/lib/hooks";
 
 const HeroScene = dynamic(() => import("./HeroScene"), {
@@ -88,8 +88,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.85 }}
         >
-          I&apos;m Mayank — a software engineer focused on building reliable backend systems and AI-powered
-          applications. I turn complex ideas into practical, well-engineered products.
+          I help startups and product teams ship AI features that work in production — LLM agents, RAG and the
+          Python backends behind them, built to be fast, observable and easy to own.
         </motion.p>
 
         <motion.div
@@ -124,6 +124,16 @@ export function Hero() {
               data-cursor="link"
             >
               <LinkedInIcon className="h-[18px] w-[18px]" />
+            </a>
+            <a
+              href={site.whatsapp}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Chat on WhatsApp"
+              className="rounded-full p-3 text-ink-2 transition-colors hover:text-ink"
+              data-cursor="link"
+            >
+              <WhatsAppIcon className="h-[18px] w-[18px]" />
             </a>
           </div>
         </motion.div>

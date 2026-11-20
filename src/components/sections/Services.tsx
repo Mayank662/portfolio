@@ -22,7 +22,7 @@ export function Services() {
       </div>
       <div className="relative mx-auto max-w-[1440px] px-5 md:px-10">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeading index="02" eyebrow="What I do" lines={["Things you can", "hire me for."]} />
+          <SectionHeading index="02" eyebrow="What I do" lines={["Where I do", <span key="g" className="text-glow">my best work.</span>]} />
           <Reveal delay={0.2} className="max-w-sm text-ink-2 lg:pb-3">
             Three ways I usually show up on a project. Most engagements are a mix — a backend that needs an AI
             layer, or an AI idea that needs a real backend.

@@ -8,6 +8,9 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   email: "mayankgoyal662@gmail.com",
   phone: { display: "+91-9149121554", href: "tel:+919149121554", e164: "+919149121554" },
+  whatsapp: `https://wa.me/919149121554?text=${encodeURIComponent(
+    "Hi Mayank, I saw your portfolio and have a project in mind.",
+  )}`,
   github: "https://github.com/mayank662",
   linkedin: "https://www.linkedin.com/in/mayank-goel-724932174/",
   location: "India · Remote-friendly",
@@ -17,7 +20,7 @@ export const site = {
 export const nav = [
   { label: "About", href: "#about" },
   { label: "What I Do", href: "#services" },
-  { label: "Selected Work", href: "#work" },
+  { label: "Experience", href: "#work" },
   { label: "Playground", href: "#playground" },
   { label: "Beyond Code", href: "#beyond" },
   { label: "Contact", href: "#contact" },

@@ -7,19 +7,16 @@ import { projects, type Project } from "@/content/projects";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Diagram } from "./Diagram";
+import { AgentDashboard, ServiceDashboard } from "./DashboardVisual";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const statusLabel: Record<Project["status"], string> = {
-  concept: "Concept",
-  "in-progress": "In progress",
-  shipped: "Shipped",
-};
-
 function ProjectCard({ p, i }: { p: Project; i: number }) {
   const [open, setOpen] = useState(false);
   const flip = i % 2 === 1;
+  const example = p.status === "example";
+  const dash = p.diagram === "agent-dash" || p.diagram === "service-dash";
 
   return (
     <Reveal as="li" delay={0.05}>
@@ -27,6 +24,7 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
         className={cn(
           "spot panel group relative overflow-hidden rounded-3xl transition-colors duration-500",
           open ? "border-accent/40" : "hover:border-line-2",
+          example && "border-dashed border-accent/30",
         )}
         onPointerMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
@@ -36,15 +34,28 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
       >
         <div className={cn("grid lg:grid-cols-12", flip && "lg:[&>*:first-child]:order-2")}>
           {/* Visual */}
-          <div className="relative min-h-[240px] overflow-hidden border-b border-line lg:col-span-5 lg:min-h-[360px] lg:border-b-0 lg:border-r">
+          <div
+            className={cn(
+              "relative overflow-hidden border-b border-line lg:col-span-5 lg:border-b-0 lg:border-r",
+              dash ? "min-h-[460px] sm:min-h-[440px]" : "min-h-[240px] lg:min-h-[360px]",
+            )}
+          >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.10),transparent_60%)]" />
-            <div className="absolute inset-0 p-6 transition-transform duration-700 ease-out-expo group-hover:scale-[1.03] md:p-10">
-              <Diagram kind={p.diagram} />
+            <div
+              className={cn(
+                "absolute inset-0 transition-transform duration-700 ease-out-expo group-hover:scale-[1.02]",
+                dash ? "p-4 pt-12 md:p-8 md:pt-12" : "p-6 md:p-10",
+              )}
+            >
+              {p.diagram === "agent-dash" ? (
+                <AgentDashboard />
+              ) : p.diagram === "service-dash" ? (
+                <ServiceDashboard />
+              ) : (
+                <Diagram kind={p.diagram} />
+              )}
             </div>
             <span className="absolute left-5 top-5 font-mono text-xs text-accent">{p.index}</span>
-            <span className="absolute right-5 top-5 rounded-full border border-line bg-bg/60 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ink-2 backdrop-blur">
-              {statusLabel[p.status]}
-            </span>
           </div>
 
           {/* Copy */}
@@ -75,11 +86,11 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
                 >
                   <div className="mt-8 grid gap-8 border-t border-line pt-8 md:grid-cols-2">
                     <div>
-                      <div className="eyebrow mb-3">Problem</div>
+                      <div className="eyebrow mb-3">{example ? "The scenario" : "Problem"}</div>
                       <p className="text-sm leading-relaxed text-ink/90">{p.problem}</p>
                     </div>
                     <div>
-                      <div className="eyebrow mb-3">Approach</div>
+                      <div className="eyebrow mb-3">{example ? "Week by week" : "Approach"}</div>
                       <ul className="space-y-2">
                         {p.approach.map((a) => (
                           <li key={a} className="flex gap-2 text-sm leading-relaxed text-ink/90">
@@ -103,7 +114,7 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
                 data-cursor="link"
               >
                 {open ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                {open ? "Less" : "Problem & approach"}
+                {open ? "Less" : example ? "See the 4-week plan" : "Problem & approach"}
               </button>
               {p.links?.map((l) => (
                 <a
@@ -117,8 +128,12 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
                 </a>
               ))}
               {!p.links?.length && (
-                <a href="#contact" className="inline-flex h-11 items-center gap-1.5 px-2 text-sm text-ink-2 hover:text-ink">
-                  Discuss something similar <ArrowUpRight className="h-3.5 w-3.5" />
+                <a
+                  href="#contact"
+                  className="inline-flex h-11 items-center gap-1.5 px-2 text-sm text-ink-2 hover:text-ink"
+                >
+                  {example ? "Start a project like this" : "Discuss something similar"}{" "}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               )}
             </div>
@@ -134,10 +149,15 @@ export function Work() {
     <section id="work" className="relative scroll-mt-16 py-28 md:py-40">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeading index="03" eyebrow="Selected work" lines={["Problems I like", "to work on."]} />
+          <SectionHeading
+            index="03"
+            eyebrow="Experience"
+            lines={["Experience I bring", <span key="g" className="text-glow">to your project.</span>]}
+          />
           <Reveal delay={0.2} className="max-w-sm text-ink-2 lg:pb-3">
-            Work from the last few years across HRTech, FinTech and B2B platforms — agents in production, services
-            under real load, and the observability that keeps both honest.
+            Production work across HRTech, FinTech, B2B and GST compliance — the same patterns I bring to your
+            product: agents that hold up with real users, services under real load, and the observability to prove
+            both.
           </Reveal>
         </div>
 
