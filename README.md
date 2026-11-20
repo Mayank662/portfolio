@@ -27,6 +27,8 @@ A dark, motion-heavy personal site that stays fast and accessible:
 - **Hidden terminal.** Press <kbd>`</kbd> anywhere and try `help`, `whoami`, `projects`, `experience`, `skills`, `open work`.
 - **Playground of live experiments.** Canvas demos you can poke: a lattice that bends to your pointer, an LLM token stream, a job-queue orbit, a rippling noise field.
 - **Project cards with architecture diagrams.** Hand-drawn SVG diagrams per project, each card expanding into problem and approach.
+- **Live observability dashboards.** Animated agent-cost and service-health boards (latency, cost by tool, trace waterfall, heap and GC, pods, traffic, network), built in SVG with no chart library and paused when off-screen.
+- **WhatsApp, one tap away.** In the hero, the contact section and a floating button that steps aside when Contact is on screen.
 - **Smooth scroll, custom cursor, magnetic buttons, text reveals.** All of it switches off under `prefers-reduced-motion`.
 - **A contact form that never dead-ends.** It sends via Resend when configured and falls back to a pre-filled `mailto:` when not.
 
@@ -35,15 +37,19 @@ A dark, motion-heavy personal site that stays fast and accessible:
 | About | What I do |
 | --- | --- |
 | <img src="docs/screenshots/about.png" alt="About section" /> | <img src="docs/screenshots/services.png" alt="Services section" /> |
-| **Selected work** | **Playground** |
-| <img src="docs/screenshots/work.png" alt="Selected work" /> | <img src="docs/screenshots/playground.png" alt="Playground experiments" /> |
-| **Terminal easter egg** | **Contact** |
-| <img src="docs/screenshots/terminal.png" alt="Hidden terminal" /> | <img src="docs/screenshots/contact.png" alt="Contact form" /> |
+| **Experience** | **Observability dashboards** |
+| <img src="docs/screenshots/work.png" alt="Experience section" /> | <img src="docs/screenshots/dashboards.png" alt="Agent and service dashboards" /> |
+| **Playground** | **Terminal easter egg** |
+| <img src="docs/screenshots/playground.png" alt="Playground experiments" /> | <img src="docs/screenshots/terminal.png" alt="Hidden terminal" /> |
+
+**Contact**
+
+<img src="docs/screenshots/contact.png" alt="Contact form" width="100%" />
 
 <p align="center">
   <img src="docs/screenshots/mobile-hero.png" alt="Mobile hero" width="260" />
   &nbsp;&nbsp;
-  <img src="docs/screenshots/mobile-work.png" alt="Mobile selected work" width="260" />
+  <img src="docs/screenshots/mobile-work.png" alt="Mobile experience section" width="260" />
 </p>
 
 ## Tech stack
@@ -81,12 +87,12 @@ src/
 ├─ app/                 layout, page, API route, OG image, sitemap, robots
 ├─ components/
 │  ├─ hero/             Hero + R3F scene
-│  ├─ sections/         About, Services, Work, Playground, Beyond, Contact, Diagram
+│  ├─ sections/         About, Services, Work, Playground, Beyond, Contact, Diagram, DashboardVisual
 │  ├─ playground/       canvas demos
 │  ├─ terminal/         the ` terminal
 │  ├─ layout/           Nav, Footer
 │  ├─ providers/        Lenis smooth scroll
-│  └─ ui/               Cursor, Loader, Reveal, Magnetic, Button, Icons
+│  └─ ui/               Cursor, Loader, Reveal, Magnetic, Button, Icons, WhatsAppFab
 ├─ content/             ← all copy lives here
 └─ lib/                 hooks, scroll lock, utils
 ```
@@ -100,7 +106,7 @@ All copy lives in `src/content/`, so the usual changes never touch a component:
 | `site.ts` | name, title, links, availability, nav, stack marquee |
 | `about.ts` | intro, principles, timeline, education, recognition, skills |
 | `services.ts` | "What I do" cards |
-| `projects.ts` | Selected work cards and their diagrams |
+| `projects.ts` | Experience cards and their diagrams / dashboard visuals |
 | `experiments.ts` | Playground tiles |
 | `beyond.ts` | "Beyond the terminal" photos and captions |
 
